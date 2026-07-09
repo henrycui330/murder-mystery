@@ -93,7 +93,7 @@ gltfLoader.load('katana.glb', (gltf) => {
       child.receiveShadow = true;
     }
   });
-  console.log('Katana GLB model loaded successfully');
+  console.log('Katana GLB model loaded successfully [v1.0.3]');
 }, undefined, (err) => console.error('Failed to load Katana GLB:', err));
 
 gltfLoader.load('gun.glb', (gltf) => {
