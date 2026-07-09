@@ -6,7 +6,10 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 // --------------------------------------------------------
 // SOCKET & STATE
 // --------------------------------------------------------
-const socket = io(`http://${window.location.hostname}:3000`);
+const urlParams = new URLSearchParams(window.location.search);
+const serverIp = urlParams.get('ip') || window.location.hostname;
+const host = (serverIp === 'henrycui330.github.io') ? 'localhost' : serverIp;
+const socket = io(`http://${host}:3000`);
 
 let myId = null;
 let myRole = 'unassigned';
@@ -80,7 +83,7 @@ function normalizeModel(name, modelScene, targetSize, rotationCorrection = null)
   return wrapper;
 }
 
-gltfLoader.load('/katana.glb', (gltf) => {
+gltfLoader.load('katana.glb', (gltf) => {
   const rot = new THREE.Euler(0, -Math.PI / 2, 0); // Rotate 90 deg around Y to point forward
   preloadedKatana = normalizeModel('Katana', gltf.scene, 1.2, rot); // standard 1.2 units length
   preloadedKatana.traverse((child) => {
@@ -92,7 +95,7 @@ gltfLoader.load('/katana.glb', (gltf) => {
   console.log('Katana GLB model loaded successfully');
 }, undefined, (err) => console.error('Failed to load Katana GLB:', err));
 
-gltfLoader.load('/gun.glb', (gltf) => {
+gltfLoader.load('gun.glb', (gltf) => {
   const rot = new THREE.Euler(0, -Math.PI / 2, 0); // Rotate 90 deg around Y to point forward
   preloadedGun = normalizeModel('Gun', gltf.scene, 0.45, rot); // standard 0.45 units size (increased)
   preloadedGun.traverse((child) => {
@@ -139,21 +142,21 @@ scene.add(ground);
 const textureLoader = new THREE.TextureLoader();
 
 // Load textures locally from the public directory (resolves CORS and 404s)
-const grassTexture = textureLoader.load('/grass.jpg');
+const grassTexture = textureLoader.load('grass.jpg');
 grassTexture.wrapS = THREE.RepeatWrapping;
 grassTexture.wrapT = THREE.RepeatWrapping;
 grassTexture.repeat.set(15, 15);
 
-const woodTexture = textureLoader.load('/wood.jpg');
+const woodTexture = textureLoader.load('wood.jpg');
 woodTexture.wrapS = THREE.RepeatWrapping;
 woodTexture.wrapT = THREE.RepeatWrapping;
 woodTexture.repeat.set(8, 5);
 
-const brickTexture = textureLoader.load('/brick.jpg');
+const brickTexture = textureLoader.load('brick.jpg');
 brickTexture.wrapS = THREE.RepeatWrapping;
 brickTexture.wrapT = THREE.RepeatWrapping;
 
-const brickBumpTexture = textureLoader.load('/brick_bump.jpg');
+const brickBumpTexture = textureLoader.load('brick_bump.jpg');
 brickBumpTexture.wrapS = THREE.RepeatWrapping;
 brickBumpTexture.wrapT = THREE.RepeatWrapping;
 
