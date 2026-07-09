@@ -3,6 +3,7 @@ import { PointerLockControls } from 'three/examples/jsm/controls/PointerLockCont
 import { io } from 'socket.io-client';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
+// Version 1.0.2 - Forced Redeploy
 // --------------------------------------------------------
 // SOCKET & STATE
 // --------------------------------------------------------
