@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Murder Mystery Extended</title>
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <body>
+    <div id="ui-layer">
+      <div id="lobby-screen" class="screen">
+        <h1>Murder Mystery</h1>
+        
+        <div id="login-form">
+          <input type="text" id="username-input" placeholder="Enter Name..." maxlength="15" />
+          <button id="join-btn">Join Lobby</button>
+        </div>
+
+        <div id="lobby-details" class="hidden">
+          <p id="lobby-status">Waiting for players...</p>
+          
+          <div class="mode-container">
+            <span class="mode-label">Game Mode:</span>
+            <button id="btn-mode-standard" class="mode-btn">Standard</button>
+            <button id="btn-mode-extended" class="mode-btn active">Extended</button>
+          </div>
+
+          <p>Timer: <span id="lobby-timer">0</span></p>
+          
+          <div class="players-box">
+            <h3>Players In Lobby:</h3>
+            <div id="players-list"></div>
+          </div>
+        </div>
+      </div>
+
+      <div id="role-reveal-screen" class="screen hidden">
+        <h1 id="role-title">You are the ...</h1>
+        <p id="role-desc">Your objective is ...</p>
+      </div>
+
+      <div id="hud" class="hidden">
+        <div class="crosshair">+</div>
+        <div class="hud-top">
+          <div>Time left: <span id="game-timer">0</span></div>
+        </div>
+        <div class="hud-bottom">
+          <div id="current-role">Role: <span></span></div>
+          <div id="action-hint">Click to Use Ability</div>
+        </div>
+      </div>
+
+      <div id="game-over-screen" class="screen hidden">
+        <h1 id="winner-text">Game Over</h1>
+        <div id="reveal-list"></div>
+      </div>
+
+      <div id="blind-overlay" class="hidden">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/46/Pie_in_the_face.jpg" alt="Pie" />
+      </div>
+
+      <div id="stun-overlay" class="hidden">
+        <h2>STUNNED!</h2>
+      </div>
+      
+      <div id="dead-overlay" class="hidden">
+        <h2>YOU DIED</h2>
+      </div>
+    </div>
+    
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>
