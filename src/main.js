@@ -12,6 +12,41 @@ const serverIp = urlParams.get('ip') || window.location.hostname;
 const host = (serverIp === 'henrycui330.github.io') ? 'localhost' : serverIp;
 const socket = io(`http://${host}:3000`);
 
+const joinBtn = document.getElementById('join-btn');
+if (joinBtn) {
+  joinBtn.disabled = true;
+  joinBtn.innerText = 'Connecting to Server...';
+}
+
+socket.on('connect', () => {
+  console.log('Connected to socket server!');
+  if (joinBtn) {
+    joinBtn.disabled = false;
+    joinBtn.innerText = 'Join Lobby';
+  }
+});
+
+socket.on('disconnect', () => {
+  console.log('Disconnected from socket server!');
+  if (joinBtn) {
+    joinBtn.disabled = true;
+    joinBtn.innerText = 'Offline (Reconnecting...)';
+  }
+  if (hasJoined) {
+    hasJoined = false;
+    document.getElementById('login-form').classList.remove('hidden');
+    document.getElementById('lobby-details').classList.add('hidden');
+  }
+});
+
+socket.on('connect_error', (error) => {
+  console.error('Socket connection error:', error);
+  if (joinBtn) {
+    joinBtn.disabled = true;
+    joinBtn.innerText = 'Offline (Reconnecting...)';
+  }
+});
+
 let myId = null;
 let myRole = 'unassigned';
 let gameState = 'lobby';
